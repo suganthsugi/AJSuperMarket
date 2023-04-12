@@ -4,6 +4,7 @@ public class Main {
     public static Inventory inventory = new Inventory();
     public static HashMap<Integer, Product> idProdMap = new HashMap<>();
     public static HashMap<Product, Stock> prodStockMap = new HashMap<>();
+    public static List<Order> orders = new ArrayList<>();
 
     public static String[] getInput() {
         Scanner sc = new Scanner(System.in);
@@ -37,17 +38,54 @@ public class Main {
         inventory.addStock(newStock);
     }
 
+
+    public static OrderItem[] createOrderItems(String input) {
+        String[] items =  input.split(";");
+        int totItems = items.length;
+        OrderItem[] orderItems = new OrderItem[totItems];
+        for(int i=0; i<totItems; i++) {
+            String[] oiData = items[i].split("\\|");
+            System.out.println(Arrays.toString(oiData));
+            int id = Integer.parseInt(oiData[0].strip());
+            int quantity = Integer.parseInt((oiData[1].strip()));
+            Product currProd = idProdMap.get(id);
+            OrderItem oi = new OrderItem(currProd, quantity);
+
+            orderItems[i] = oi;
+        }
+        return orderItems;
+    }
+
+    public static Order createOrder(OrderItem[] orderItems) {
+        Order order = new Order(orderItems);
+        order.calculateTotal();
+        return order;
+    }
+
+    public static void handleSale(String input) {
+        OrderItem[] orderItems = createOrderItems(input);
+        Order order = createOrder(orderItems);
+        orders.add(order);
+        order.gendrateBill();
+    }
+
+
     public static void handleInput(String type, String input) {
         if(type.equalsIgnoreCase("INVENTORY")) {
             handleInventory(input);
         }
+        if(type.equalsIgnoreCase("SALE")) {
+            handleSale(input);
+        }
     }
 
     public static void main(String[] args) {
-        String[] typeAndInput = getInput();
-        String type = typeAndInput[0];
-        String input = typeAndInput[1];
 
-        handleInput(type, input);
+        while (true) {
+            String[] typeAndInput = getInput();
+            String type = typeAndInput[0];
+            String input = typeAndInput[1];
+            handleInput(type, input);
+        }
     }
 }
