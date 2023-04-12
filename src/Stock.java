@@ -6,4 +6,12 @@ public class Stock {
         this.product = p;
         this.quantity = quantity;
     }
+
+    boolean ckeckForAvailability(int quantity) {
+        return this.quantity>=quantity;
+    }
+
+    void updateStock(int quantity) {
+        this.quantity+=quantity;
+    }
 }
