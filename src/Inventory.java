@@ -7,4 +7,26 @@ public class Inventory {
         this.inventory.put(stock.product.id, stock);
         System.out.println("Inventory Updated");
     }
+
+    public Stock getStock (int id) {
+        return inventory.get(id);
+    }
+
+    public int getStockQuantity (int id) {
+        return inventory.get(id).quantity;
+    }
+
+    public Product getProduct(int id) {
+
+        return inventory.get(id).product;
+    }
+
+    public void reduceStockForOrder(HashMap<Integer, Integer> orderItemsMap) {
+        for (Integer id : orderItemsMap.keySet()) {
+            int quantity = orderItemsMap.get(id);
+            Stock stock = inventory.get(id);
+
+            stock.updateStock(-quantity);
+        }
+    }
 }

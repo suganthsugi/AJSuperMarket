@@ -7,9 +7,6 @@ public class Stock {
         this.quantity = quantity;
     }
 
-    boolean ckeckForAvailability(int quantity) {
-        return this.quantity>=quantity;
-    }
 
     void updateStock(int quantity) {
         this.quantity+=quantity;
