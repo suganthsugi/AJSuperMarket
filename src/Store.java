@@ -7,6 +7,7 @@ public class Store {
 
     List<Order> orders = new ArrayList<>();
 
+
     Store(int id, String name) {
         this.id = id;
         this.name = name;
@@ -39,7 +40,6 @@ public class Store {
         newOrder.processOrder(orderItemsMap, this);
 
         if (newOrder.orderItems != null){
-            inventory.reduceStockForOrder(orderItemsMap);
             this.orders.add(newOrder);
         }
 

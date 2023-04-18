@@ -4,8 +4,7 @@ public class Main {
     public static String[] getConsoleInput() {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
-        String[] typeAndInput = input.split("=>");
-        return typeAndInput;
+        return input.split("=>");
     }
 
     public static void createNewProduct(int id, String prodName, int quantity, int price_per_unit, Store store) {
@@ -62,69 +61,19 @@ public class Main {
         System.out.println(name + " - " + quantity);
     }
 
-    // public static String getOfferName(String input) {
-    //     String offerName = input.strip().split("\\|")[0];
-    //     return offerName;
-    // }
-
-    // public static List<Integer> parseIdForOffer(String input) {
-    //     List<String> stringIds = Arrays.asList(input.strip().split(","));
-    //     List<Integer> ids = new ArrayList<>();
-
-    //     for (String x : stringIds) {
-    //         ids.add(Integer.parseInt(x.strip()));
-    //     }
-    //     return ids;
-    // }
-
-    // public static void applyBuyXMoreForProduct(int id, BuyXMore offer) {
-    //     Product currProd = idProdMap.get(id);
-    //     offer.applyForProduct(currProd);
-    // }
-
-    // public static void applyBuyXMoreForProducts(String ids, BuyXMore offer) {
-    //     List<Integer> allIds = parseIdForOffer(ids);
-    //     for (Integer id : allIds) {
-    //         applyBuyXMoreForProduct(id, offer);
-    //     }
-    // }
-
-    // public static BuyXMore createBuyXMoreOfferFromInput(String input) {
-    //     String[] offerData = input.split("\\|");
-    //     int id = Integer.parseInt(offerData[0].strip());
-    //     int min_quantity = Integer.parseInt(offerData[1].strip());
-    //     int discount_percent = Integer.parseInt(offerData[2].strip());
-
-    //     BuyXMore newOffer = new BuyXMore(id, min_quantity, discount_percent);
-    //     offers.put(id, newOffer);
-
-    //     return newOffer;
-    // }
-
-    // public static void handleBuyXMore() {
-
-    // }
-
-    // public static void handleOffer(String input){
-    //     String offerName = getOfferName(input);
-    //     if(offerName.equalsIgnoreCase("BuyXMore")) {
-    //         handleBuyXMore();
-    //     }
-    // }
 
     public static void handleInput(String type, String input, Store store) {
-        if(type.equalsIgnoreCase("INVENTORY")) {
-            handleInventory(input, store);
+        switch (type) {
+            case "INVENTORY":
+                handleInventory(input, store);
+                break;
+            case "SALE":
+                handleSale(input, store);
+                break;
+            case "STOCK":
+                handleCheckStock(input, store);
+                break;
         }
-        else if(type.equalsIgnoreCase("SALE")) {
-            handleSale(input, store);
-        }
-        else if(type.equalsIgnoreCase("STOCK")) {
-            handleCheckStock(input, store);
-        }
-//        else if(type.equalsIgnoreCase("OFFER")) {
-////            handleOffer(input);
-//        }
     }
 
     public static void main(String[] args) {

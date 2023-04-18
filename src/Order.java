@@ -2,20 +2,25 @@ import java.util.*;
 
 public class Order {
     List<OrderItem> orderItems = new ArrayList<>();
+
+
+    public void addOrderItem(int id, int quantity, Store store) {
+        Product product = store.getProduct(id);
+
+        if (quantity <= store.getStockQuantity(id)) {
+            OrderItem oi = new OrderItem(product, quantity);
+            this.orderItems.add(oi);
+            store.inventory.getStock(id).updateStock(-quantity);
+        }
+        else {
+            System.out.println(product.id + " | " + product.name + "==> Out of stock");
+        }
+    }
+
     public void processOrder(HashMap<Integer, Integer> orderItemsMap, Store store) {
         for (Integer id : orderItemsMap.keySet()) {
-            Product product = store.getProduct(id);
             int quantity = orderItemsMap.get(id);
-
-            if(quantity <= store.getStockQuantity(id)) {
-                OrderItem oi = new OrderItem(product, quantity);
-                orderItems.add(oi);
-            }
-            else {
-                System.out.println(product.id + " | " + product.name + "==> Out of stock");
-                this.orderItems = null;
-                return;
-            }
+            addOrderItem(id, quantity, store);
         }
     }
 
