@@ -12,10 +12,6 @@ public class Inventory {
         return inventory.get(id);
     }
 
-    public int getStockQuantity (int id) {
-        return inventory.get(id).quantity;
-    }
-
     public Product getProduct(int id) {
 
         return inventory.get(id).product;

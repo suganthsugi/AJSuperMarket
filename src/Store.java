@@ -33,7 +33,7 @@ public class Store {
         return this.inventory.getProduct(id).name;
     }
 
-    public Order processOrder(HashMap<Integer, Integer> orderItemsMap) {
+    public Order makeOrder(HashMap<Integer, Integer> orderItemsMap) {
         Order newOrder = new Order();
 
         newOrder.processOrder(orderItemsMap, this);

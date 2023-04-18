@@ -48,7 +48,7 @@ public class Main {
     public static void handleSale(String input, Store store) {
         HashMap<Integer, Integer> orderItemsMap = parseSaleInput(input);
 
-        Order order = store.processOrder(orderItemsMap);
+        Order order = store.makeOrder(orderItemsMap);
 
         order.generateBill();
     }
