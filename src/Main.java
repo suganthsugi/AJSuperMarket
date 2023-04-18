@@ -122,9 +122,9 @@ public class Main {
         else if(type.equalsIgnoreCase("STOCK")) {
             handleCheckStock(input, store);
         }
-        else if(type.equalsIgnoreCase("OFFER")) {
-//            handleOffer(input);
-        }
+//        else if(type.equalsIgnoreCase("OFFER")) {
+////            handleOffer(input);
+//        }
     }
 
     public static void main(String[] args) {
